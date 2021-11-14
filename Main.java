@@ -1,99 +1,44 @@
 package com.company;
 import java.util.Random;
 import java.util.Scanner;
+public class Main {
 
-public class Main{
-
-    public static void main( String [] args ){
-
-        Random random = new Random();
-        Scanner scanner = new Scanner(System.in);
-        String computerChoice;
-        String userChoice;
-        String winner;
+    public static void main( String[] args)
+    {
+        int Rock = 0;
+        int Paper = 1;
+        int Scissors = 2;
 
 
-        computerChoice = generateComputerChoice( random );
-        userChoice = getUserChoice( scanner );
-        winner = chooseWinner( computerChoice, userChoice );
-
-        System.out.println( "\nYou choose : " + userChoice + "\nComputer choose : " +computerChoice );
-        System.out.println( winner );
-
-    }
-
-    public static String generateComputerChoice( Random  random){
+        int userChoice;
+        int computerChoice; //
+        Scanner myScan = new Scanner(System.in);
+        Random myRandom = new Random();
 
 
-        int number = random.nextInt( 2 ) + 1;
-        String computerChoice = "";
+        System.out.println("0. Rock");
+        System.out.println("1. Paper");
+        System.out.println("2. Scissors");
+        System.out.print( "\nPlease Choice (0,1,2) " );
+        userChoice = myScan.nextInt();
+
+        computerChoice = myRandom.nextInt(3);
 
 
-        if( number == 0 ){
-            computerChoice = "rock";
-        }else if( number == 1){
-            computerChoice = "paper";
-        }else if( number == 2 ){
-            computerChoice = "scissors";
+        System.out.println("\nYou choose : " + computerChoice + "\nComputer choose : "+ userChoice);
+
+        if ( userChoice==computerChoice )
+        {
+
+            System.out.println("No Winner,Both choose same");
         }
-
-
-        return computerChoice;
-
-    }
-
-    public static String getUserChoice( Scanner scanner ){
-
-        String userWordChoice = "";
-        System.out.print( "\nPlease Choice (Rock,scissors,paper) " );
-        userWordChoice = scanner.nextLine();
-        return userWordChoice;
-
-    }
-
-
-    public static String chooseWinner( String computerChoice, String userChoice ){
-
-        String winner = "No Winner";
-        String customMessage = "Both choose same";
-        String finalMessage = "";
-
-        String rockCustomMessage = "The rock beats scissor";
-        String scissorsCustomMessage = "Scissors beats paper";
-        String paperCustomMessage = "Paper beats rock";
-
-
-
-        if( computerChoice.equals( "rock" ) && userChoice.equalsIgnoreCase( "scissors" ) ){
-            winner = "Computer";
-            customMessage = rockCustomMessage;
-        }else if( userChoice.equalsIgnoreCase( "rock" ) && computerChoice.equals( "scissors" ) ){
-            winner = "User";
-            customMessage = rockCustomMessage;
+        else if ( (userChoice==Rock && computerChoice==Scissors ) || (userChoice==Scissors  && computerChoice==Paper) || (userChoice==Paper && computerChoice== Rock) )
+        {
+            System.out.println("you Wins!");
         }
-
-        if( computerChoice.equals( "scissors" ) && userChoice.equalsIgnoreCase( "paper" ) ){
-            winner = "Computer";
-            customMessage = scissorsCustomMessage;
-        }else if( userChoice.equalsIgnoreCase( "scissors" ) && computerChoice.equals( "paper" ) ){
-            winner = "User";
-            customMessage = scissorsCustomMessage;
+        else
+        {
+            System.out.println("Computer WIns!");
         }
-
-        if( computerChoice.equals( "paper" ) && userChoice.equalsIgnoreCase( "rock" ) ){
-            winner = "Computer";
-            customMessage = scissorsCustomMessage;
-        }else if( userChoice.equalsIgnoreCase( "paper" ) && computerChoice.equals( "rock" ) ){
-            winner = "User";
-            customMessage = paperCustomMessage;
-        }
-
-
-        finalMessage = winner + " won ( " + customMessage + " )";
-
-
-        return finalMessage;
-
     }
-
 }
